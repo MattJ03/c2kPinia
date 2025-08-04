@@ -33,7 +33,8 @@ class StudentController extends Controller
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
             'email' => 'required|email|max:50|unique:students',
-            'phone' => 'required'
+            'phone' => 'required|string|min:6|max:12',
+            'gender' => 'required|'
         ]);
     }
 

@@ -41,8 +41,8 @@ class StudentController extends Controller
         return response()->json($student, 200, ['message' => 'task created']);
     }
 
-    public function show(Student $student) {
-        $student = Student::findOrFail($student);
+    public function show($id) {
+        $student = Student::findOrFail($id);
         if(!$student) {
             return response()->json(['message' => 'task does not exist']);
         }

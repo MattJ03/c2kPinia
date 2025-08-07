@@ -10,12 +10,31 @@ export const useStudentStore = defineStore('students', () => {
     const students = ref([]);
     const studentsCount = computed(() => students.value.length);
 
-    function fetchTasks() {
-        loading.value = true;
-        await axios.get('/api/student') {
-            Header: {
-                Authorization: 
-            }
+   async function fetchTask() {
+    loading.value = true;
+    try {
+        const res = await axios.get('/student', {
+            header: {
+                Authorization: 'Bearer ${token}',
+     },
+        });
+        tasks.value = res.data;
+        } catch(error) {
+            console.log('Failed to fetch tasks', error);
+        }  finally {
+            loading.value = false;
         }
+   };
+
+   async function addTask(task) {
+    loading.value = true;
+    try {
+        const res = axios.post('/student', task {
+            header: {
+                Authorization: 'Bearer ${token}',
+            }
+        }) 
     }
+   }
+    
 });

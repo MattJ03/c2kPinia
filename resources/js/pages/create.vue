@@ -13,11 +13,18 @@
         <label> Email </label>
         <input type="email" v-model="form.email" required/>
     </div>
-    <div class="form-group" />
+    <div class="form-group" >
     <label> Phone Number </label>
     <input type="number" v-model="form.phone" required />
     </div>
-    <
+    <div class="form-group" >
+        <label> Gender </label>
+        <select v-model="form.gender">
+            <option> Male </option>
+            <option> Female </option>
+        </select>
+    </div>
+    <button class=""
 </div>
 </template>
 <script setup>
@@ -63,5 +70,8 @@ const form = reactive({
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.create-form {
+    
 }
 </style>

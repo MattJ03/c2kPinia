@@ -10,31 +10,63 @@ export const useStudentStore = defineStore('students', () => {
     const students = ref([]);
     const studentsCount = computed(() => students.value.length);
 
-   async function fetchTask() {
+   async function fetchStudents() {
     loading.value = true;
     try {
         const res = await axios.get('/student', {
-            header: {
-                Authorization: 'Bearer ${token}',
+            headers: {
+                Authorization: `Bearer ${token}`,
      },
         });
-        tasks.value = res.data;
+        students.value = res.data;
         } catch(error) {
-            console.log('Failed to fetch tasks', error);
+            console.log('Failed to fetch students', error);
         }  finally {
             loading.value = false;
         }
    };
 
-   async function addTask(task) {
+   async function addStudent(student) {
     loading.value = true;
     try {
-        const res = axios.post('/student', task {
-            header: {
-                Authorization: 'Bearer ${token}',
-            }
-        }) 
+        const res = await axios.post('/student', student, {
+         headers: {
+            Authorization: `Bearer ${token}`,
+         },
+        });
+          students.value.push(res.data);
+    } catch(error) {
+        console.log('Failed to add student', error);
+    } finally {
+        loading.value = false;
     }
    }
+
+   async function deleteStudent(student) {
+    loading.value = true;
+    try {
+        const res = await axios.delete('/student/${student.id}', {
+            headers: {
+           Authorization: `Bearer ${token}`,
+            },
+        });
+         students.value = students.value.filter(s => s.id !== student.id);
+    } catch(error) {
+        console.log('Failed to delete the student', error);
+    } finally {
+        loading.value = false;
+    }
+   }
+
+   return [
+   loading, 
+   error, 
+   student.
+   students,
+   studentsCount,
+   fetchStudents,
+   addStudent,
+   deleteStudent
+   ];
     
 });

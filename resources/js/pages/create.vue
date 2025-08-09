@@ -24,7 +24,7 @@
             <option> Female </option>
         </select>
     </div>
-    <button class=""
+    <button class="button-create" @click.prevent="store.addStudent(form)"> Create </button>
 </div>
 </template>
 <script setup>
@@ -71,7 +71,15 @@ const form = reactive({
     justify-content: center;
     align-items: center;
 }
-.create-form {
-    
+.button-create {
+    width: 110px;
+    height: 50px;
+    border:10px;
+    background-color: gold;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 14px;
 }
 </style>

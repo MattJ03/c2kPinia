@@ -1,6 +1,6 @@
 <template>
 <div class="form-container">
-    <h1 class="header-create"> Create Form </h1>
+    <h2 class="header-create"> Create Form </h2>
     <div class="form-group">
         <label> First Name </label>
         <input type="text" v-model="form.first_name" required />
@@ -42,6 +42,7 @@ const form = reactive({
     phone: '',
     gender: '',
 });
+
 
 
 

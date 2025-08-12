@@ -10,11 +10,35 @@ export const useStudentStore = defineStore('students', () => {
     const error = ref('');
     const numberOfStudents = computed(() => students.value.length);
 
-    async function fetchTasks() {
+    async function fetchStudents() {
         loading.value = true;
         try {
             const res = await axios.get('/api/student');
             students.value = res.data;
+        } catch(error) {
+            console.log(error);
+        } finally {
+            loading.value = false;
+        }
+    }
+
+    async function addStudent(student) {
+        loading.value = true;
+        try {
+            const res = await axios.post('/api/student');
+            students.value.push(res.data);
+        } catch(error) {
+            console.log(error);
+        } finally {
+            loading.value = false;
+        }
+    }
+
+    async function getStudent(gotStudent) {
+        loading.value = true;
+        try {
+            const res = await axios.get(`/api/student/${gotStudent.value.id}`)
+            student.value = res.data;
         } catch(error) {
             console.log(error);
         } finally {

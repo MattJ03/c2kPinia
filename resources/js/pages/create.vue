@@ -24,14 +24,14 @@
             <option> Female </option>
         </select>
     </div>
-    <button class="button-create" @click.prevent="store.addStudent(form)"> Create </button>
+    <button class="button-create" @click="createStudent"> Add Student </button>
 </div>
 </template>
 <script setup>
 import { ref } from 'vue';
 import { reactive } from 'vue';
 import router from '../router/index';
-import StudentStore, { useStudentStore } from '../store/studentStore.vue'
+import { useStudentStore } from '../store/studentStore'
 
 const store = useStudentStore();
 
@@ -43,6 +43,9 @@ const form = reactive({
     gender: '',
 });
 
+  const createStudent = async () => {
+    await store.addStudent(form);
+  };
 
 
 

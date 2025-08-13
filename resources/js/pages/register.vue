@@ -4,13 +4,13 @@
     <img src="/public/storage/images/registerimage.png" alt="register image"></img>
     <div class="form-group">
         <label> Email </label>
-        <input type="email" v-model="form.email" />
+        <input type="email" class="form-group" v-model="form.email" />
     </div>
     <div class="form-group">
         <label> Passoword </label>
-        <input type="password" v-model="form.password" />
+        <input type="password" class="form-group" v-model="form.password" />
     </div>
-      <button class="register-button" @click="registerAccount"> Register Account </button>
+      <button class="register-button" @click="registerUser"> Register Account </button>
 </div>
  </template>
 <script setup>
@@ -18,9 +18,7 @@ import { ref } from 'vue';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import router from '../router/index';
-import { useAuthStore } from '../store/authStore.vue';
-
-;
+import axios from 'axios';
 
 const form = reactive({
    email: '',
@@ -29,16 +27,17 @@ const form = reactive({
 const error = ref('');
 const loading = ref(false);
 
-const registerAccount = async () => {
-   loading.value = true;
-   try {
+const registerUser = async () => {
+    loading.value = true;
+    try {
     const res = await axios.post('/api/register', form);
     router.push('/login');
-   } catch(error) {
-   } finally {
-    loading.value = false;
-   };
-}
+    } catch(error) {
+        console.log('couldnt create student ', error);
+    } finally {
+        loading.value = false;
+    }
+};
 
 
 
@@ -46,33 +45,36 @@ const registerAccount = async () => {
 <style scoped>
    .register-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 8px;
+    border: 8px solid black;
+    padding: 16px;
+    min-height: 100vh;
     border-radius: 14px;
     margin: 2px;
+    gap: 16px;
     background-color: blue;
     color: white;
  }
  .register-header {
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: 28px;
+    
  }
  .form-group {
     margin-bottom: 2px;
-    border-radius: 16px;
+    gap: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 16px;
+   height: 40px;
+   width: 200px;
  }
  .register-image {
     border: 1px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1px;
+    border-radius: 20px;
+    margin-bottom: 10px;
  }
  .register-button {
     width: 110px;

@@ -13,10 +13,6 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = '';
   }
 
-  function loadToken() {
-    token.value = localStorage.getItem('token');
-    axios.defaults.headers.common['Authorization'] = `Bearer' ${token.value}`;
-  }
 
   async function login(credentials) {
     try {

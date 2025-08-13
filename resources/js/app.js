@@ -11,7 +11,5 @@ const pinia = createPinia();
 app.use(pinia);
 app.use(router);
 
-const authStore = useAuthStore();
-authStore.loadToken();
 
 app.mount('#app');

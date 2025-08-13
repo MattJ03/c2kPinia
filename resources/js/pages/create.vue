@@ -1,6 +1,8 @@
 <template>
 <div class="form-container">
+
     <h2 class="header-create"> Create Form </h2>
+    <form class="form-container" @submit.prevent >
     <div class="form-group">
         <label> First Name </label>
         <input type="text" v-model="form.first_name" required />
@@ -25,6 +27,7 @@
         </select>
     </div>
     <button class="button-create" @click="createStudent"> Add Student </button>
+    </form>
 </div>
 </template>
 <script setup>
@@ -63,6 +66,8 @@ const form = reactive({
     border: 8px;
     border-radius: 14px;
     display: flex;
+    flex-direction: column;
+    gap: 10px;
     justify-content: center;
     align-items: center;
     background-color: blue;

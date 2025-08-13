@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
     public function register(Request $request) {
         $validatedData = $request->validate([
+          'name' => 'required|string|max:30',
           'email' => 'required|email|unique:users|max:20',
-          'password' => 'required|max:20|password',
+          'password' => 'required|max:20',
         ]);
 
         $user = User::create([
+            'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),    
         ]);
-        return response()->json(['message' => 'user created', 201]);
+        return response()->json(['message' => 'user created'], 201);
     }
 
    public function login(Request $request) {

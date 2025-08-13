@@ -1,39 +1,53 @@
 <template>
 <div class="register-container">
     <h2 class="register-header"> Register Account </h2>
-    <img src="/public/storage/images/registerimage.png" alt="register image"></img>
+    <img src="/public/storage/images/registerimage.png" alt="register image" />
+    <form @submit.prevent="registerUser">
+        <div class="form-group">
+            <label> Name </label>
+            <input type="text" class="form-group" v-model="form.name" />
+        </div>
     <div class="form-group">
         <label> Email </label>
         <input type="email" class="form-group" v-model="form.email" />
     </div>
     <div class="form-group">
-        <label> Passoword </label>
+        <label> Password </label>
         <input type="password" class="form-group" v-model="form.password" />
     </div>
-      <button class="register-button" @click="registerUser"> Register Account </button>
+    <button class="register-button" type="submit"> Register </button>
+</form>
 </div>
  </template>
+
 <script setup>
 import { ref } from 'vue';
 import { reactive } from 'vue';
-import { useRouter } from 'vue-router';
 import router from '../router/index';
 import axios from 'axios';
 
+console.log('check in');
 const form = reactive({
-   email: '',
+    name: '',
+    email: '',
    password: '',
 });
 const error = ref('');
 const loading = ref(false);
 
 const registerUser = async () => {
+    console.log('Hey');
+    console.log('form, ', form);
     loading.value = true;
     try {
-    const res = await axios.post('/api/register', form);
-    router.push('/login');
+    const res = await axios.post('http://127.0.0.1:8000/api/register', {
+  name: form.name,
+  email: form.email,
+  password: form.password
+});
+    await router.push('/login');
     } catch(error) {
-        console.log('couldnt create student ', error);
+        console.log('couldnt create user ', error);
     } finally {
         loading.value = false;
     }
@@ -86,5 +100,8 @@ const registerUser = async () => {
     align-items: center;
     background-color: gold;
     color: white;
+ }
+ .register-button:hover {
+    background-color: black;
  }
 </style>
